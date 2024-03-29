@@ -22,7 +22,7 @@ func _process(delta):
 	pass
 
 func _display_path():
-	var _path:Array[Vector2i] = _pathGen.generate_path()
+	var _path: Array[Vector2i] = _pathGen.generate_path()
 
 	while _path.size() < 35:
 		print("faked out")
@@ -43,26 +43,26 @@ func _display_path():
 		match tile_score:
 			10:
 				tile = tile_straight.instantiate()
-				tile_rotation = Vector3(0,90,0)
+				tile_rotation = Vector3(0, 90, 0)
 			8:
 				tile = tile_end.instantiate()
-				tile_rotation = Vector3(0,90,0)
+				tile_rotation = Vector3(0, 90, 0)
 			2:
 				tile = tile_start.instantiate()
-				tile_rotation = Vector3(0,-90,0)
-			5,4,1:
+				tile_rotation = Vector3(0, -90, 0)
+			5, 4, 1:
 				tile = tile_straight.instantiate()
 			12:
 				tile = tile_corner.instantiate()
-				tile_rotation = Vector3(0,90,0)
+				tile_rotation = Vector3(0, 90, 0)
 			9:
 				tile = tile_corner.instantiate()
 			3:
 				tile = tile_corner.instantiate()
-				tile_rotation = Vector3(0,-90,0)
+				tile_rotation = Vector3(0, -90, 0)
 			6:
 				tile = tile_corner.instantiate()
-				tile_rotation = Vector3(0,180,0)
+				tile_rotation = Vector3(0, 180, 0)
 			_:
 				tile = tile_empty.instantiate()
 		add_child(tile)
@@ -73,7 +73,7 @@ func _display_path():
 func _complete_grid():
 	for i in range(map_length):
 		for j in range(map_height):
-			if not _pathGen.get_path().has(Vector2i(i,j)):
+			if not _pathGen.get_path().has(Vector2i(i, j)):
 				var tile: Node3D = tile_empty.instantiate()
 				add_child(tile)
-				tile.global_position = Vector3(i,0,j)
+				tile.global_position = Vector3(i, 0, j)
