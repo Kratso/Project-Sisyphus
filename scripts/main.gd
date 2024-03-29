@@ -2,16 +2,24 @@ extends Node3D
 
 @export var tile_straight: PackedScene
 @export var tile_corner: PackedScene
+@export var tile_crossroad: PackedScene
 @export var tile_empty: PackedScene
 @export var tile_start: PackedScene
 @export var tile_end: PackedScene
+@export var tile_enemy: PackedScene
 
-@export var map_length: int = 16
-@export var map_height: int = 9
-# Called when the node enters the scene tree for the first time.
+@export var map_length: int = 18
+@export var map_height: int = 11
+
+@export var min_path_size = 45
+@export var max_path_size = 70
+@export var min_loops = 2
+@export var max_loops = 7
+
 
 var _pathGen: PathGenerator
 
+# Called when the node enters the scene tree for the first time.
 func _ready():
 	_pathGen = PathGenerator.new(map_length, map_height)
 	_display_path()
@@ -22,11 +30,11 @@ func _process(delta):
 	pass
 
 func _display_path():
-	var _path: Array[Vector2i] = _pathGen.generate_path()
+	var _path: Array[Vector2i] = _pathGen.generate_path(true)
 
-	while _path.size() < 35:
+	while _path.size() < min_path_size or _path.size() > max_path_size or _pathGen.get_loop_count() < min_loops or _pathGen.get_loop_count() > max_loops:
 		print("faked out")
-		_path = _pathGen.generate_path()
+		_path = _pathGen.generate_path(true)
 	print(_path)
 
 # HOW THE SCORING WORKS
@@ -63,6 +71,8 @@ func _display_path():
 			6:
 				tile = tile_corner.instantiate()
 				tile_rotation = Vector3(0, 180, 0)
+			15:
+				tile = tile_crossroad.instantiate()
 			_:
 				tile = tile_empty.instantiate()
 		add_child(tile)
