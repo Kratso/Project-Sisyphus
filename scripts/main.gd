@@ -24,6 +24,9 @@ func _ready():
 	_pathGen = PathGenerator.new(map_length, map_height)
 	_display_path()
 	_complete_grid()
+	
+	await get_tree().create_timer(2).timeout
+	_pop_along_grid()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -87,3 +90,30 @@ func _complete_grid():
 				var tile: Node3D = tile_empty.instantiate()
 				add_child(tile)
 				tile.global_position = Vector3(i, 0, j)
+
+func _add_curve_point(c3d:Curve3D, v3:Vector3) ->bool:
+	c3d.add_point(v3)
+	return true
+	
+func _pop_along_grid():
+	var box = tile_enemy.instantiate()
+	
+	var c3d:Curve3D = Curve3D.new()
+	
+	for element in _pathGen.get_path():
+		c3d.add_point(Vector3(element.x, 0.4, element.y))
+
+	var path_curve:Path3D = Path3D.new()
+	add_child(path_curve)
+	path_curve.curve = c3d
+	
+	var follow_path:PathFollow3D = PathFollow3D.new()
+	path_curve.add_child(follow_path)
+	follow_path.add_child(box)
+	
+	var curr_distance:float = 0.0
+	
+	while curr_distance < c3d.point_count-1:
+		curr_distance += 0.02
+		follow_path.progress = clamp(curr_distance, 0, c3d.point_count-1.00001)
+		await get_tree().create_timer(0.01).timeout

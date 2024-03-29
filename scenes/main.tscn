@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://dk06b4rkn6qgg"]
+[gd_scene load_steps=8 format=3 uid="uid://dk06b4rkn6qgg"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_5hxqx"]
 [ext_resource type="PackedScene" uid="uid://dx5ffp3neskiu" path="res://models/tile.glb" id="2_3ni8s"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://c63yksbes8ecl" path="res://models/tile_cornerRound.glb" id="3_u2t3q"]
 [ext_resource type="PackedScene" uid="uid://bodwm2yf5shb3" path="res://models/tile_crossing.glb" id="4_8jvo1"]
 [ext_resource type="PackedScene" uid="uid://dmxi2e4s62ail" path="res://models/tile_endRoundSpawn.glb" id="5_kisrh"]
+[ext_resource type="PackedScene" uid="uid://usws3vmkknt3" path="res://models/enemy_ufoGreen.glb" id="7_2q8sr"]
 
 [node name="Main" type="Node3D"]
 script = ExtResource("1_5hxqx")
@@ -15,6 +16,7 @@ tile_crossroad = ExtResource("4_8jvo1")
 tile_empty = ExtResource("2_3ni8s")
 tile_start = ExtResource("5_kisrh")
 tile_end = ExtResource("5_kisrh")
+tile_enemy = ExtResource("7_2q8sr")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.172445, 0.985019, 0, -0.985019, 0.172445, 7.8096, 8.48543, 6.92844)
