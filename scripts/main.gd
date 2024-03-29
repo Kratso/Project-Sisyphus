@@ -8,6 +8,7 @@ extends Node3D
 @export var tile_end: PackedScene
 @export var tile_enemy: PackedScene
 
+@export var basic_enemy: PackedScene
 
 
 # Called when the node enters the scene tree for the first time.
@@ -15,7 +16,13 @@ func _ready():
 	_complete_grid()
 	
 	await get_tree().create_timer(2).timeout
-	_pop_along_grid()
+	
+	for i in range(20):
+		await get_tree().create_timer(2).timeout
+		print("Instantiating enemy")
+		var enemy = basic_enemy.instantiate()
+		add_child(enemy)
+		enemy.add_to_group("enemies")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -64,32 +71,3 @@ func _complete_grid():
 		add_child(tile)
 		tile.global_position = Vector3(PathGenSingleton.get_path_tile(i).x, 0, PathGenSingleton.get_path_tile(i).y)
 		tile.global_rotation_degrees = tile_rotation
-
-		
-
-func _add_curve_point(c3d:Curve3D, v3:Vector3) ->bool:
-	c3d.add_point(v3)
-	return true
-	
-func _pop_along_grid():
-	var box = tile_enemy.instantiate()
-	
-	var c3d:Curve3D = Curve3D.new()
-	
-	for element in PathGenSingleton.get_path_route():
-		c3d.add_point(Vector3(element.x, 0.4, element.y))
-
-	var path_curve:Path3D = Path3D.new()
-	add_child(path_curve)
-	path_curve.curve = c3d
-	
-	var follow_path:PathFollow3D = PathFollow3D.new()
-	path_curve.add_child(follow_path)
-	follow_path.add_child(box)
-	
-	var curr_distance:float = 0.0
-	
-	while curr_distance < c3d.point_count-1:
-		curr_distance += 0.02
-		follow_path.progress = clamp(curr_distance, 0, c3d.point_count-1.00001)
-		await get_tree().create_timer(0.01).timeout

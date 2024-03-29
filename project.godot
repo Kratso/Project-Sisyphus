@@ -17,4 +17,8 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-PathGenSingleton="*res://scripts/path_generator.gd"
+PathGenSingleton="*res://scripts/path/path_generator.gd"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/godot_state_charts/plugin.cfg")

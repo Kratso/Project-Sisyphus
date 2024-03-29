@@ -11,7 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://byxh7cr4mrdwm" path="res://models/tile_tree.glb" id="9_775tm"]
 [ext_resource type="PackedScene" uid="uid://wcku0iof2owo" path="res://models/tile_crystal.glb" id="9_h36ff"]
 [ext_resource type="PackedScene" uid="uid://dlueqdh07v78v" path="res://models/tile_treeDouble.glb" id="10_ngg45"]
-[ext_resource type="PackedScene" uid="uid://ca20dt7dkt8ia" path="res://scenes/enemies/basic_enemy.tscn" id="12_3pvkj"]
+[ext_resource type="PackedScene" uid="uid://ca20dt7dkt8ia" path="res://scenes/basic_enemy.tscn" id="12_3pvkj"]
 
 [node name="Main" type="Node3D"]
 script = ExtResource("1_5hxqx")
