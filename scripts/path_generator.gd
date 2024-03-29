@@ -1,21 +1,32 @@
-extends Object
+extends Node
 class_name PathGenerator
 
-var _grid_length: int
-var _grid_height: int
+const path_config: PathGeneratorConfig = preload ("res://resources/basic_path_resource.res")
+
 var _loop_count: int
 
+var _grid_height: int
+var _grid_length: int
 var _path: Array[Vector2i]
 
-func _init(length: int, height: int):
-	_grid_height = height
-	_grid_length = length
+func _init():
+	_grid_height = path_config.map_height
+	_grid_length = path_config.map_length
+	generate_path(path_config.add_loops)
+	var it_counter: int = 1
+	while ((_path.size() < path_config.min_path_size) 
+		or (_path.size() > path_config.max_path_size) 
+		or (path_config.add_loops and _loop_count < path_config.min_loops) 
+		or (path_config.add_loops and _loop_count > path_config.max_loops)):
+		generate_path(path_config.add_loops)
+		print("Iterating ", it_counter)
+		it_counter += 1
 
-func get_path() -> Array[Vector2i]:
+func get_path_route() -> Array[Vector2i]:
 	return _path
 
 func generate_path(add_loops: bool=false):
-	_path.clear();
+	_path.clear()
 	_loop_count = 0
 	randomize()
 	
@@ -40,11 +51,11 @@ func generate_path(add_loops: bool=false):
 			
 	return _path
 
-func get_tile_score(tile: Vector2i) -> int:
+func get_tile_score(tileIndex: int) -> int:
 	var score: int = 0
 	
-	var x = tile.x
-	var y = tile.y
+	var x = _path[tileIndex].x
+	var y = _path[tileIndex].y
 	
 	score += 1 if _path.has(Vector2i(x, y - 1)) else 0
 	score += 2 if _path.has(Vector2i(x + 1, y)) else 0
