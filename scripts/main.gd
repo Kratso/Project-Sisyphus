@@ -42,6 +42,12 @@ func _physics_process(delta):
 			var collider = ray_result.get("collider")
 
 
+#
+#		+1
+#	+8		+2
+#		+4
+#
+
 func _complete_grid():
 	for i in range(PathGenSingleton._grid_length):
 		for j in range(PathGenSingleton._grid_height):
