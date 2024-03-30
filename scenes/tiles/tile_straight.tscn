@@ -5,7 +5,7 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_7ldv8"]
 size = Vector3(1, 0.3, 1)
 
-[node name="Node3D" type="Area3D"]
+[node name="tile_straight" type="Area3D" groups=["path"]]
 
 [node name="tile_straight" parent="." instance=ExtResource("1_d1i87")]
 

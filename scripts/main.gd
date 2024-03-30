@@ -6,10 +6,11 @@ extends Node3D
 @export var tile_empty: Array[PackedScene]
 @export var tile_start: PackedScene
 @export var tile_end: PackedScene
-@export var tile_enemy: PackedScene
 
 @export var basic_enemy: PackedScene
 
+@onready var cam = $Camera3D
+var RAYCAST_LENGTH:float = 100
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -27,6 +28,19 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
+
+func _physics_process(delta):
+	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
+		var space_state = get_world_3d().direct_space_state
+		var mouse_pos = get_viewport().get_mouse_position()
+		var origin = cam.project_ray_origin(mouse_pos)
+		var end = origin + cam.project_ray_normal(mouse_pos) * RAYCAST_LENGTH
+		var query = PhysicsRayQueryParameters3D.create(origin, end)
+		query.collide_with_areas = true
+		var ray_result = space_state.intersect_ray(query)
+		if ray_result.size() > 0 :
+			var collider = ray_result.get("collider")
+
 
 func _complete_grid():
 	for i in range(PathGenSingleton._grid_length):

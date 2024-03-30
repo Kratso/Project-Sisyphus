@@ -1,33 +1,57 @@
-[gd_scene load_steps=13 format=3 uid="uid://dk06b4rkn6qgg"]
+[gd_scene load_steps=16 format=3 uid="uid://dk06b4rkn6qgg"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_5hxqx"]
-[ext_resource type="PackedScene" uid="uid://dx5ffp3neskiu" path="res://models/tile.glb" id="2_3ni8s"]
-[ext_resource type="PackedScene" uid="uid://dhubrbjjcpouv" path="res://models/tile_straight.glb" id="2_paplw"]
-[ext_resource type="PackedScene" uid="uid://c63yksbes8ecl" path="res://models/tile_cornerRound.glb" id="3_u2t3q"]
-[ext_resource type="PackedScene" uid="uid://bodwm2yf5shb3" path="res://models/tile_crossing.glb" id="4_8jvo1"]
-[ext_resource type="PackedScene" uid="uid://dmxi2e4s62ail" path="res://models/tile_endRoundSpawn.glb" id="5_kisrh"]
-[ext_resource type="PackedScene" uid="uid://usws3vmkknt3" path="res://models/enemy_ufoGreen.glb" id="7_2q8sr"]
-[ext_resource type="PackedScene" uid="uid://c50rx1e0ffn20" path="res://models/tile_rock.glb" id="8_u3t5k"]
-[ext_resource type="PackedScene" uid="uid://byxh7cr4mrdwm" path="res://models/tile_tree.glb" id="9_775tm"]
-[ext_resource type="PackedScene" uid="uid://wcku0iof2owo" path="res://models/tile_crystal.glb" id="9_h36ff"]
-[ext_resource type="PackedScene" uid="uid://dlueqdh07v78v" path="res://models/tile_treeDouble.glb" id="10_ngg45"]
+[ext_resource type="PackedScene" uid="uid://bgav8wf3b80dt" path="res://scenes/tiles/tile_straight.tscn" id="2_afrd8"]
+[ext_resource type="PackedScene" uid="uid://dm2f36kdsqvxj" path="res://scenes/tiles/corner_round.tscn" id="3_gj62l"]
+[ext_resource type="PackedScene" uid="uid://cp6nmn8ujfcje" path="res://scenes/tiles/tile_crossing.tscn" id="4_tdrdn"]
+[ext_resource type="PackedScene" uid="uid://dkl2bc3kyhae0" path="res://scenes/tiles/tile_empty.tscn" id="5_5jlab"]
+[ext_resource type="PackedScene" uid="uid://bgqv07kt10qwj" path="res://scenes/tiles/tile_rock.tscn" id="6_augv0"]
+[ext_resource type="PackedScene" uid="uid://daw5hpw88krom" path="res://scenes/tiles/tile_crystal.tscn" id="7_qcdn8"]
+[ext_resource type="PackedScene" uid="uid://bg7fqc1jponqx" path="res://scenes/tiles/tile_tree.tscn" id="8_oajps"]
+[ext_resource type="PackedScene" uid="uid://hownnbamffju" path="res://scenes/tiles/tile_start.tscn" id="9_5pyxx"]
+[ext_resource type="PackedScene" uid="uid://dfo0xa11bwrm2" path="res://scenes/tiles/tile_end.tscn" id="10_vixcl"]
 [ext_resource type="PackedScene" uid="uid://ca20dt7dkt8ia" path="res://scenes/enemies/basic_enemy.tscn" id="12_3pvkj"]
+[ext_resource type="PackedScene" uid="uid://chad40hcpfmaf" path="res://scenes/ui/activity_button.tscn" id="12_5gxa2"]
+[ext_resource type="Texture2D" uid="uid://dnwe442illoox" path="res://images/cannon01a.png" id="13_b38o8"]
+[ext_resource type="PackedScene" uid="uid://dbxb5j280xvqw" path="res://scenes/turrets/basic_turret.tscn" id="14_k1cnb"]
+[ext_resource type="Material" path="res://materials/red_transparent.material" id="15_ujnnx"]
 
 [node name="Main" type="Node3D"]
 script = ExtResource("1_5hxqx")
-tile_straight = ExtResource("2_paplw")
-tile_corner = ExtResource("3_u2t3q")
-tile_crossroad = ExtResource("4_8jvo1")
-tile_empty = Array[PackedScene]([ExtResource("2_3ni8s"), ExtResource("2_3ni8s"), ExtResource("2_3ni8s"), ExtResource("2_3ni8s"), ExtResource("2_3ni8s"), ExtResource("8_u3t5k"), ExtResource("9_h36ff"), ExtResource("9_775tm"), ExtResource("10_ngg45")])
-tile_start = ExtResource("5_kisrh")
-tile_end = ExtResource("5_kisrh")
-tile_enemy = ExtResource("7_2q8sr")
+tile_straight = ExtResource("2_afrd8")
+tile_corner = ExtResource("3_gj62l")
+tile_crossroad = ExtResource("4_tdrdn")
+tile_empty = Array[PackedScene]([ExtResource("5_5jlab"), ExtResource("5_5jlab"), ExtResource("5_5jlab"), ExtResource("5_5jlab"), ExtResource("5_5jlab"), ExtResource("6_augv0"), ExtResource("7_qcdn8"), ExtResource("8_oajps")])
+tile_start = ExtResource("9_5pyxx")
+tile_end = ExtResource("10_vixcl")
 basic_enemy = ExtResource("12_3pvkj")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.172445, 0.985019, 0, -0.985019, 0.172445, 7.8096, 8.48543, 6.92844)
+transform = Transform3D(1, 0, 0, 0, 0.172445, 0.985019, 0, -0.985019, 0.172445, 7.8096, 9.32817, 8.26932)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -0.0241006, 0.99971, 0, -0.99971, -0.0241006, 0, 1.64188, 0)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -40.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="basic_turret_button" parent="Control" instance=ExtResource("12_5gxa2")]
+layout_mode = 0
+offset_top = -86.0
+offset_right = 96.0
+offset_bottom = 10.0
+activity_button_icon = ExtResource("13_b38o8")
+activity_draggable = ExtResource("14_k1cnb")
+_error_mat = ExtResource("15_ujnnx")
